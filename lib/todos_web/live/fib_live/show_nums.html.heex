@@ -4,14 +4,16 @@
 
 <h1>Enter a Fibonacci sequence position number to view the sum</h1>
 
-<.form for={@form}>
-  <div class="flex gap-2 items-end">
-    <div class="grow mr-3">
-      <.input field={@form[:seq_num]} name="seq_num" type="text" value={@form[:seq_num]} />
-    </div>
-    <button class="bg-black border border-black hover:bg-gray-700 py-2 px-3 rounded-md" phx-click="calculate">Calculate</button>
+<div class="flex gap-2 items-end">
+  <div class="grow mr-3">
+    <.form for={@fib_num_input} phx-submit="calculate">
+        <input field={@fib_num_input[:seq_num]} name="seq_num" type="text" value={@fib_num_input[:seq_num]} />
+        <button class="bg-black border border-black hover:bg-gray-700 py-2 px-3 rounded-md">Calculate</button>
+    </.form>
   </div>
-</.form>
+</div>
+
+<h1>Sum is: {@sum}</h1>
 
 <.list :for={num <- @fib_nums}>
   <:item title="Sum:">{num}</:item>

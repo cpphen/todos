@@ -5,8 +5,10 @@ defmodule TodosWeb.FibLive.ShowNums do
   # Use `assign` to set values to socket object
   @impl true
   def mount(_params, _session, socket) do
-    socket = socket
-      |> assign(form: %{"seq_num" => "Initial Value"})
+    socket =
+      socket
+      |> assign(fib_num_input: %{seq_num: nil}, sum: nil)
+
     {:ok, socket}
   end
 
@@ -21,10 +23,23 @@ defmodule TodosWeb.FibLive.ShowNums do
   end
 
   @impl true
-  def handle_event("calculate", %{"seq_num" => seq_num_params}, socket) do
-    IO.puts "\n HERE \n"
-    IO.inspect(seq_num_params)
-    {:noreply, assign(socket, form: to_form(seq_num_params, as: :seq_num))}
+  def handle_event("calculate", %{"seq_num" => seq_num}, socket) do
+    IO.inspect(seq_num, label: "calculate Event Handler *******")
+
+    case Integer.parse(seq_num) do
+      {int, _} ->
+        sum = FibNums.calculate(int)
+        {:noreply, assign(socket, sum: sum)}
+
+      :error ->
+        {:noreply, assign(socket, sum: "Invalid number")}
+    end
+
+    # socket =
+    #   socket
+    #   |> assign(:sum, sum)
+
+    # {:noreply, socket}
   end
 
   defp apply_action(socket, :fibs, _params) do

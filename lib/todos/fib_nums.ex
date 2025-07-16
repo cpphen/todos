@@ -2,10 +2,7 @@ defmodule Todos.FibNums do
   use GenServer
 
   ## Client API
-
-  def start_link(_opts) do
-    GenServer.start_link(__MODULE__, [], name: __MODULE__)
-  end
+  def start_link(_opts), do: GenServer.start_link(__MODULE__, %{}, name: __MODULE__)
 
   def get_fibs do
     GenServer.call(__MODULE__, :get_fibs)
@@ -15,10 +12,17 @@ defmodule Todos.FibNums do
     GenServer.cast(__MODULE__, :add_fib)
   end
 
+  def calculate(n), do: GenServer.call(__MODULE__, {:calc, n})
+
   ## Server Callbacks
 
   def init(_init_arg) do
-    {:ok, [0, 1]}
+    {:ok, {:ok, %{}}}
+  end
+
+  def handle_call({:calc, n}, _from, state) when is_integer(n) and n >= 0 do
+    result = fib(n)
+    {:reply, result, state}
   end
 
   def handle_call(:get_fibs, _from, state) do
@@ -30,4 +34,10 @@ defmodule Todos.FibNums do
     next = a + b
     {:noreply, [next | state]}
   end
+
+  ## Server Callbacks
+
+  defp fib(0), do: 0
+  defp fib(1), do: 1
+  defp fib(n), do: fib(n - 1) + fib(n - 2)
 end
