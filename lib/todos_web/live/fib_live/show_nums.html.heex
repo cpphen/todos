@@ -1,0 +1,9 @@
+<.header>
+  <:subtitle>View List of the Fibonnaci Sequence</:subtitle>
+</.header>
+
+<h1>Enter a Fibonacci sequence position number to view the sum</h1>
+
+<.list id="nums" :for={num <- @fib_nums}>
+  <:item title="Sum:">{num}</:item>
+</.list>
