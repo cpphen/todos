@@ -10,18 +10,12 @@
     <div class="flex">
       <div class="w-full sm:w-auto">
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-4">
-          <h2 class="bg-yellow-100">To Do's</h2>
+          <h2 class="underline">Fibonacci Center</h2>
           <.link 
-            class="border-b border-black hover:bg-gray-100 font-bold py-2 px-3 rounded-md" 
-            navigate={~p"/tasks"}
+            class="border-b border-black hover:bg-gray-100 text-blue-500 py-2 px-3 rounded-md" 
+            navigate={~p"/fib"}
           >
-              View or Edit Tasks
-          </.link>
-          <.link 
-            class="border-b border-black hover:bg-gray-100 font-bold py-2 px-3 rounded-md" 
-            navigate={~p"/tasks/new"}
-          >
-              Create New Task
+              View Fibonacci Tree
           </.link>
         </div>
       </div>
@@ -29,12 +23,18 @@
     <div class="flex">
       <div class="w-full sm:w-auto">
         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-4">
-          <h2 class="underline">Fibonacci Center</h2>
+          <h2 class="underline">To Do's</h2>
           <.link 
-            class="border-b border-black hover:bg-gray-100 font-bold py-2 px-3 rounded-md" 
-            navigate={~p"/fib"}
+            class="border-b border-black hover:bg-gray-100 text-blue-500 py-2 px-3 rounded-md" 
+            navigate={~p"/tasks"}
           >
-              View Fibonacci Tree
+              View or Edit Tasks
+          </.link>
+          <.link 
+            class="border-b border-black hover:bg-gray-100 text-blue-500 py-2 px-3 rounded-md" 
+            navigate={~p"/tasks/new"}
+          >
+              Create New Task
           </.link>
         </div>
       </div>

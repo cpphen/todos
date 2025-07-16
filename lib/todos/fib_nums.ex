@@ -21,7 +21,7 @@ defmodule Todos.FibNums do
   end
 
   def handle_call({:calc, n}, _from, state) when is_integer(n) and n >= 0 do
-    result = fib(n)
+    result = fib_tree_calculator(n)
     {:reply, result, state}
   end
 
@@ -37,7 +37,7 @@ defmodule Todos.FibNums do
 
   ## Server Callbacks
 
-  defp fib(0), do: 0
-  defp fib(1), do: 1
-  defp fib(n), do: fib(n - 1) + fib(n - 2)
+  defp fib_tree_calculator(0), do: 0
+  defp fib_tree_calculator(1), do: 1
+  defp fib_tree_calculator(n), do: fib_tree_calculator(n - 1) + fib_tree_calculator(n - 2)
 end

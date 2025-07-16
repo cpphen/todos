@@ -2,18 +2,18 @@
   <:subtitle>View List of the Fibonnaci Sequence</:subtitle>
 </.header>
 
-<h1>Enter a Fibonacci sequence position number to view the sum</h1>
+<h1 class="mb-5">Enter a Fibonacci sequence position number to view the sum</h1>
 
-<div class="flex gap-2 items-end">
+<div class="flex gap-3 items-end mb-5">
   <div class="grow mr-3">
     <.form for={@fib_num_input} phx-submit="calculate">
-        <input field={@fib_num_input[:seq_num]} name="seq_num" type="text" value={@fib_num_input[:seq_num]} />
-        <button class="bg-black border border-black hover:bg-gray-700 py-2 px-3 rounded-md">Calculate</button>
+        <input class="rounded" field={@fib_num_input[:seq_num]} name="seq_num" type="text" value={@fib_num_input[:seq_num]} />
+        <button class="bg-black border border-black text-white hover:bg-gray-700 py-2 px-3 rounded-md">Calculate</button>
     </.form>
   </div>
 </div>
 
-<h1>Sum is: {@sum}</h1>
+<h1>Sum is: <span class="animate-bounce text-blue">{@sum}</span></h1>
 
 <.list :for={num <- @fib_nums}>
   <:item title="Sum:">{num}</:item>

@@ -7,19 +7,9 @@ defmodule TodosWeb.FibLive.ShowNums do
   def mount(_params, _session, socket) do
     socket =
       socket
-      |> assign(fib_num_input: %{seq_num: nil}, sum: nil)
+      |> assign(fib_num_input: %{seq_num: nil}, sum: nil, fib_nums: [])
 
     {:ok, socket}
-  end
-
-  @impl true
-  def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
-  end
-
-  @impl true
-  def handle_info(:refresh, socket) do
-    {:noreply, assign(socket, :fibs, FibNums.get_fibs())}
   end
 
   @impl true
@@ -29,6 +19,8 @@ defmodule TodosWeb.FibLive.ShowNums do
     case Integer.parse(seq_num) do
       {int, _} ->
         sum = FibNums.calculate(int)
+        # fib_nums = int
+        #   |> FibNums.get_nums()
         {:noreply, assign(socket, sum: sum)}
 
       :error ->
@@ -42,8 +34,8 @@ defmodule TodosWeb.FibLive.ShowNums do
     # {:noreply, socket}
   end
 
-  defp apply_action(socket, :fibs, _params) do
-    socket
-    |> assign(:fib_nums, [0, 1, 1, 2, 3])
-  end
+  # defp apply_action(socket, :fibs, _params) do
+  #   socket
+  #   |> assign(:fib_nums, [0, 1, 1, 2, 3])
+  # end
 end
